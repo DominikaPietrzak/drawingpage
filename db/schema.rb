@@ -12,12 +12,6 @@
 
 ActiveRecord::Schema.define(version: 20180312132122) do
 
-  create_table "posts", force: :cascade do |t|
-    t.string "title"
-    t.string "content"
-    t.string "author"
-  end
-
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
