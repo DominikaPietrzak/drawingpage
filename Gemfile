@@ -32,8 +32,9 @@ gem 'jbuilder', '~> 2.5'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
+#GEM DEVISE FOR USER AUTHENTICATION
 gem 'devise'
-
+#GEM PAPER CLIP FOR IMAGES
 gem "paperclip", "~> 5.2.1"
 
 group :development, :test do
