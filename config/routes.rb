@@ -5,8 +5,11 @@ Rails.application.routes.draw do
   }
   resources :aboutmeinfos, only: [:index]
   resources :contacts, only: [:index]
-  resources :posts
+  resources :posts do
+  resources :comments
+  end
   resources :mainpages, only:[:index]
+
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   root to: "mainpages#index"
 
