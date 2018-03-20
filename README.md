@@ -5,7 +5,6 @@ application up and running.
 
 Things you may want to cover:
 
-<<<<<<< HEAD
 * Ruby version : ruby 2.4.0p0
 
 * System dependencies
