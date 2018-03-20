@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class ContactsControllerTest < ActionDispatch::IntegrationTest
+class ContactformsControllerTest < ActionDispatch::IntegrationTest
   # test "the truth" do
   #   assert true
   # end
