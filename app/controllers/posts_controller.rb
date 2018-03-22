@@ -6,7 +6,11 @@ class PostsController < ApplicationController
   end
 
   def new
-    @post = Post.new
+    if current_user.superadmin?
+      @post = Post.new
+    else
+      flash[:notice] = "Only superadmin can add post"
+    end
   end
 
   def show
@@ -14,11 +18,13 @@ class PostsController < ApplicationController
   end
 
   def create
-    @post = Post.new(posts_params)
-    if @post.save
-    redirect_to @post
-    else
-      render 'new'
+    if current_user.superadmin?
+      @post = Post.new(posts_params)
+      if @post.save
+        redirect_to @post
+      else
+        flash[:notice] ="Only superadmin can add psot"
+      end
     end
   end
 
