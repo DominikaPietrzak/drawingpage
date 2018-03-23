@@ -2,14 +2,15 @@ class PostsController < ApplicationController
   before_action :authenticate_user!, except: [:index, :show]
 
   def index
-    @posts = Post.all
+    post_all
   end
 
   def new
     if current_user.superadmin?
       @post = Post.new
     else
-      flash[:notice] = "Only superadmin can add post"
+      post_all #must be defind!
+      render 'index'
     end
   end
 
@@ -23,16 +24,18 @@ class PostsController < ApplicationController
       if @post.save
         redirect_to @post
       else
-        flash[:notice] ="Only superadmin can add psot"
+        post_all
+        render 'index'
       end
     end
   end
 
   def update
     @post = Post.find(params[:id])
-    if @post.update(article_params)
+    if @post.update(posts_params)
       redirect_to @post
     else
+      post_all
       render 'edit'
     end
   end
@@ -51,7 +54,10 @@ class PostsController < ApplicationController
   private
 
   def posts_params
-    params.require(:post).permit(:title, :content, :image)
+    params.require(:post).permit(:title, :text, :image)
   end
 
+  def post_all
+    @posts = Post.all
+  end
 end
