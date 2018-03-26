@@ -3,11 +3,12 @@ class PostsController < ApplicationController
 
   def index
     post_all
+     @posts = @posts.favorited_by(params[:favorited]) if params[:favorited].present?
   end
 
   def new
     if current_user.superadmin?
-      @post = Post.new
+      @post = current_user.posts.build
     else
       post_all #must be defind!
       render 'index'
@@ -20,7 +21,7 @@ class PostsController < ApplicationController
 
   def create
     if current_user.superadmin?
-      @post = Post.new(posts_params)
+      @post = current_user.posts.build(posts_params)
       if @post.save
         redirect_to @post
       else
