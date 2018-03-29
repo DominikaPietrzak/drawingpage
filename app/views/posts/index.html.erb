@@ -15,7 +15,7 @@
     <%= link_to unlike_post_path(post), class: "like", method: :put do %>
     <button type="button" class="btn btn-info" aria-label= "Left Align">
       <span class= "glyphicon glyphicon-thumbss-down glyphicon-align-center" aria-hidden="true"></span>
-      <span class="badge"> <% post.get_downvotes.size %></span>
+      <span class="badge"> <%= post.get_downvotes.size %></span>
     </button>
     <% end %>
   </p>
