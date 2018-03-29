@@ -1,5 +1,6 @@
 class PostsController < ApplicationController
   before_action :authenticate_user!, except: [:index, :show]
+  before_action :set_post, only: [:show, :update, :edit, :upvote, :downvote]
 
   def index
     post_all
@@ -15,7 +16,6 @@ class PostsController < ApplicationController
   end
 
   def show
-    @post = Post.find(params[:id])
   end
 
   def create
@@ -31,7 +31,6 @@ class PostsController < ApplicationController
   end
 
   def update
-    @post = Post.find(params[:id])
     if @post.update(posts_params)
       redirect_to @post
     else
@@ -48,7 +47,17 @@ class PostsController < ApplicationController
   end
 
   def edit
-    @post = Post.find(params[:id])
+  end
+
+  def upvote
+    @post.upvote_from current_user
+    redirect_to posts_path
+  end
+
+  def downvote
+    @post.downvote_from current_user
+    redirect_to posts_path
+
   end
 
   private
@@ -60,4 +69,8 @@ class PostsController < ApplicationController
   def post_all
     @posts = Post.all
   end
+  def set_post
+    @post = Post.find(params[:id])
+  end
+
 end

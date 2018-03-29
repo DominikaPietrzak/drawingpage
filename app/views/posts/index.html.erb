@@ -2,5 +2,22 @@
 <% @posts.each do |post| %>
   <h1><%= post.title %></h1>
   <p><%= post.text %><p>
-    <p><%= link_to 'Show', post_path(post)%></p>
+  <p><%= link_to 'Show', post_path(post)%></p>
+  <p><%=link_to like_post_path(post), class: "like", method: :put do%>
+      <button type="button" class="btn btn-info" aria-label="Left Align">
+        <span class= "glyphicon glyphicon-thumbs-up glyphicon-align-center" aria-hidden="true">
+        </span>
+        <span class="badge"><%= post.get_upvotes.size %></span>
+      </button>
+      <% end %>
+  </p>
+  <p>
+    <%= link_to unlike_post_path(post), class: "like", method: :put do %>
+    <button type="button" class="btn btn-info" aria-label= "Left Align">
+      <span class= "glyphicon glyphicon-thumbss-down glyphicon-align-center" aria-hidden="true"></span>
+      <span class="badge"> <% post.get_downvotes.size %></span>
+    </button>
+    <% end %>
+  </p>
+
 <% end %>
